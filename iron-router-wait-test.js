@@ -21,9 +21,7 @@ if (Meteor.isClient) {
             data: function() {
                 console.log(s.ready());
             },
-            waitOn: function() {
-                return [s];
-            }
+            waitOn: s
         });
     });
 }
