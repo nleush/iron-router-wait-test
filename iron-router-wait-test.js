@@ -13,15 +13,20 @@ if (Meteor.isClient) {
         }
     });
 
-    var s = Meteor.subscribe('items');
+    //var s = Meteor.subscribe('items');
+    var s;
 
     Router.map(function () {
         this.route('hello', {
             path: '/',
-            data: function() {
-                console.log(s.ready());
+            before: function() {
+                s = this.subscribe('items');
+                s.wait();
             },
-            waitOn: s
+            data: function() {
+                console.log('Should be true:', s.ready());
+            }
+            //,waitOn: s
         });
     });
 }
