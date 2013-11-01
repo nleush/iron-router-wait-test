@@ -13,20 +13,23 @@ if (Meteor.isClient) {
         }
     });
 
-    //var s = Meteor.subscribe('items');
-    var s;
+    var s = Meteor.subscribe('items');
+    //var s;
 
     Router.map(function () {
         this.route('hello', {
             path: '/',
+            loadingTemplate: 'wait',    // Should be 'loadingTemplate' to wait works.
+            /*
             before: function() {
                 s = this.subscribe('items');
                 s.wait();
             },
+            */
             data: function() {
                 console.log('Should be true:', s.ready());
-            }
-            //,waitOn: s
+            },
+            waitOn: s
         });
     });
 }
